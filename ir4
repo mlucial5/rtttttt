@@ -1,0 +1,37 @@
+import re
+import random # импорт стандартных библиотек регулярных
+выражений, а также для выбора случайных символов
+def check_symbols(value): # функция проверки символов
+symbols_pattern = r"[<>,*&^%$#@!-=+'0-9]" # искомые
+символы для проверки
+symbols_found = re.findall(symbols_pattern, value) #
+Поиск по слову
+if len(symbols_found) > 2: #если 3 и более символов,
+то требования удовлетворены
+return True
+else:
+return False
+def generate_password(value): #функция генерации
+случайного пароля
+letters =
+'+-/*!&$#?=@<>abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQR
+STUVWXYZ1234567890'
+value = ''
+for i in range(10): #длина 10, символы из указанного
+набора
+value += random.choice(letters)
+return value
+def validate_password(value): # функция проверки длины +
+проверки по функции символов
+password_length = len(value) # получение длины пароля
+if password_length > 8 and check_symbols(value): #
+проверка соответствия двум условиям
+print("Your password is quite good! You can use
+it.")
+else:
+good_pass = generate_password(value) #если
+проверка не пройдена, генерируем новый пароль
+print(f"Your password is not good enough... May be
+try this one: {good_pass}") # вывод рекомендации
+value = input('Enter a password to check: ')
+validate_password(value)
